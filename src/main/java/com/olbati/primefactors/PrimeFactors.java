@@ -5,18 +5,19 @@ import java.util.List;
 
 public class PrimeFactors {
 
-	public List<Integer> generate(int i) {
+	public List<Integer> generate(int numberToDecompose) {
 		ArrayList<Integer> result = new ArrayList<>();
 
-		if (isPrimeNumber(i)) {
-			result.add(i);
+		if (isPrimeNumber(numberToDecompose)) {
+			result.add(numberToDecompose);
 			return result;
 		}
 
-		for (int j = 2; j <= i; j++) {
-			if (i % j == 0 && isPrimeNumber(j)) {
-				result.add(j);
-				result.addAll(generate(i / j));
+		for (int divisor = 2; divisor <= numberToDecompose; divisor++) {
+			if (isPrimeFactor(numberToDecompose, divisor)) {
+				result.add(divisor);
+				// recusive call to generate method
+				result.addAll(generate(numberToDecompose / divisor));
 				break;
 			}
 		}
@@ -24,9 +25,13 @@ public class PrimeFactors {
 		return result;
 	}
 
+	private boolean isPrimeFactor(int numberToDecompose, int divisor) {
+		return numberToDecompose % divisor == 0 && isPrimeNumber(divisor);
+	}
+
 	boolean isPrimeNumber(int number) {
-		for (int j = 2; j < number; j++) {
-			if (number % j == 0) {
+		for (int divisor = 2; divisor < number; divisor++) {
+			if (number % divisor == 0) {
 				return false;
 			}
 		}
