@@ -4,17 +4,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
 
-import org.junit.Before;
 import org.junit.Test;
 
 public class PrimeFactorsTest {
 
-	PrimeFactors primeFactors;
-
-	@Before
-	public void init() {
-		primeFactors = new PrimeFactors();
-	}
+	PrimeFactors primeFactors = new PrimeFactors();
 
 	@Test
 	public void given1001_shouldGenerate7x11x13() {
